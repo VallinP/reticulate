@@ -133,7 +133,7 @@ conda_remove <- function(envname, packages = NULL, conda = "auto") {
 #' @keywords internal
 #'
 #' @export
-conda_install <- function(envname = NULL, packages, forge = TRUE, pip = FALSE, pip_ignore_installed = TRUE, conda = "auto") {
+conda_install <- function(envname = NULL, packages, bioconda = FALSE, forge = TRUE, pip = FALSE, pip_ignore_installed = TRUE, conda = "auto") {
 
   # resolve conda binary
   conda <- conda_binary(conda)
@@ -161,8 +161,10 @@ conda_install <- function(envname = NULL, packages, forge = TRUE, pip = FALSE, p
   } else {
     # use conda
     args <- conda_args("install", envname)
-    if (forge)
+    if (forge && !bioconda)
       args <- c(args, "-c", "conda-forge")
+    if (bioconda)
+      args <- c(args, "-c", "bioconda")
     args <- c(args, packages)
     result <- system2(conda, shQuote(args))
   }
