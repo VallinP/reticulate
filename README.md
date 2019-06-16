@@ -1,4 +1,12 @@
-# Revisited to allow Bioconda channel
+# Reticulate package modified to allow installation from Bioconda channel
+
+## How to use
+
+Just add the argument bioconda = TRUE when calling conda_install() function.
+
+## Detail of default arguments
+conda_install <- function(envname = NULL, packages, bioconda = FALSE, forge = TRUE, pip = FALSE, pip_ignore_installed = TRUE, conda = "auto")
+
 
 # R Interface to Python
 
